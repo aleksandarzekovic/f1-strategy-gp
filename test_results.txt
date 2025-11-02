@@ -1,0 +1,101 @@
+╔════════════════════════════════════════════════════════════════════╗
+║               🏎️  FORMULA 1 STRATEGY EVOLUTION 🏎️                ║
+║          Genetic Programming for Race Strategy                    ║
+║               Author: Aleksandar Zekovic                           ║
+╚════════════════════════════════════════════════════════════════════╝
+
+🏁 Creating initial population of strategies...
+
+🏎️  Starting F1 strategy evolution!
+Population: 50 | Generations: 100
+
+Gen   0 | 🏆 Best: 4588.6s | 📊 Top 10 avg: 4679.7s
+Gen  10 | 🏆 Best: 4565.0s | 📊 Top 10 avg: 4573.9s
+Gen  20 | 🏆 Best: 4565.0s | 📊 Top 10 avg: 4571.2s
+Gen  30 | 🏆 Best: 4565.0s | 📊 Top 10 avg: 4574.1s
+Gen  40 | 🏆 Best: 4563.4s | 📊 Top 10 avg: 4572.9s
+Gen  50 | 🏆 Best: 4563.4s | 📊 Top 10 avg: 4573.2s
+Gen  60 | 🏆 Best: 4563.4s | 📊 Top 10 avg: 4569.3s
+Gen  70 | 🏆 Best: 4563.4s | 📊 Top 10 avg: 4570.7s
+Gen  80 | 🏆 Best: 4561.9s | 📊 Top 10 avg: 4570.7s
+Gen  90 | 🏆 Best: 4561.9s | 📊 Top 10 avg: 4572.7s
+
+✅ Evolution complete!
+
+
+══════════════════════════════════════════════════════════════════════
+🏆 BEST EVOLVED STRATEGY:
+══════════════════════════════════════════════════════════════════════
+
+? position > 15
+  Y → PIT: False, TYRES: Hard, PUSH: True
+  N ? gap_to_rival > 5.0
+    Y ? safety_car
+      Y ? rain_probability > 0.5
+        Y → PIT: True, TYRES: Wet, PUSH: False
+        N → PIT: False, TYRES: Soft, PUSH: True
+      N ? tyre_age > 10
+        Y → PIT: False, TYRES: Soft, PUSH: True
+        N → PIT: True, TYRES: Intermediate, PUSH: False
+    N ? tyre_age > 25
+      Y ? gap_to_rival < 1.0
+        Y → PIT: True, TYRES: Medium, PUSH: False
+        N → PIT: True, TYRES: Hard, PUSH: True
+      N ? track_wetness > 0.3
+        Y ? track_wetness > 0.6
+          Y ? current_lap > 15
+            Y ? track_wetness > 0.6
+              Y → PIT: True, TYRES: Hard, PUSH: False
+              N → PIT: True, TYRES: Medium, PUSH: True
+            N ? is_soft and tyre_age > 12
+              Y → PIT: True, TYRES: Intermediate, PUSH: True
+              N → PIT: True, TYRES: Hard, PUSH: False
+          N ? is_soft and tyre_age > 12
+            Y → PIT: False, TYRES: Wet, PUSH: True
+            N ? is_hard and tyre_age > 25
+              Y → PIT: False, TYRES: Medium, PUSH: True
+              N → PIT: False, TYRES: Hard, PUSH: False
+        N → PIT: False, TYRES: Medium, PUSH: True
+
+⏱️  Average race time: 4561.91 seconds
+
+
+══════════════════════════════════════════════════════════════════════
+🧪 TESTING STRATEGY IN DIFFERENT SCENARIOS:
+══════════════════════════════════════════════════════════════════════
+
+🔴 Early race, good position, soft tyres
+   Lap: 10 | Position: 3 | Tyre age: 5 | Wetness: 0.0
+   Current: Soft Red
+   ➜ DECISION: Pit: NO, Tyres: Medium Yellow, Pace: Aggressive
+
+🟡 Mid-race, safety car deployed!
+   Lap: 25 | Position: 8 | Tyre age: 18 | Wetness: 0.0
+   Current: Medium Yellow
+   ➜ DECISION: Pit: NO, Tyres: Medium Yellow, Pace: Aggressive
+
+⚪ Late race, rain approaching
+   Lap: 45 | Position: 5 | Tyre age: 30 | Wetness: 0.1
+   Current: Hard White
+   ➜ DECISION: Pit: YES, Tyres: Medium Yellow, Pace: Conservative
+
+🟠 Start, poor position
+   Lap: 5 | Position: 15 | Tyre age: 3 | Wetness: 0.0
+   Current: Soft Red
+   ➜ DECISION: Pit: NO, Tyres: Medium Yellow, Pace: Aggressive
+
+🟢 Mid-race, track is wet!
+   Lap: 20 | Position: 6 | Tyre age: 15 | Wetness: 0.6
+   Current: Medium Yellow
+   ➜ DECISION: Pit: NO, Tyres: Hard White, Pace: Conservative
+
+══════════════════════════════════════════════════════════════════════
+📈 FITNESS EVOLUTION:
+══════════════════════════════════════════════════════════════════════
+Generation   0: 4588.58s
+Generation  25: 4565.05s
+Generation  50: 4563.38s
+Generation  75: 4563.38s
+Generation  99: 4561.91s
+
+💪 Total improvement: 26.67s (0.58%)

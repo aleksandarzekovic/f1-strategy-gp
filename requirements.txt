@@ -1,0 +1,13 @@
+# Formula 1 Strategy Evolution - Requirements
+# Author: Aleksandar Zekovic
+
+# No external dependencies required!
+# This project uses only Python standard library:
+# - random (for evolutionary randomness)
+# - copy (for deep copying strategies)
+# - dataclasses (for data structures)
+# - enum (for type definitions)
+# - typing (for type hints)
+# - argparse (for CLI)
+
+# Recommended Python version: 3.8+
